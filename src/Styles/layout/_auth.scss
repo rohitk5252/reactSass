@@ -1,0 +1,151 @@
+.login-box, .signup-box {
+  position: relative;
+  width: 400px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  // border-radius: 10px;
+  h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: $textColor;
+    text-align: center;
+  }
+  .user-box {
+    position: relative;
+    input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: $textColor;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid $textColor;
+      outline: none;
+      background: transparent;
+    }
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 16px;
+      color: $textColor;
+      pointer-events: none;
+      transition: 0.5s;
+    }
+    input:focus + label {
+      top: -20px;
+      left: 0;
+      color: $clrPrimary;
+      font-size: 12px;
+    }
+    input:valid + label {
+      top: -20px;
+      left: 0;
+      color: $clrPrimary;
+      font-size: 12px;
+    }
+  }
+
+  a.login, a.signup {
+    // position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: $clrPrimary;
+    font-size: 16px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 40px;
+    letter-spacing: 4px;
+    span {
+      position: absolute;
+      display: block;
+    }
+
+    span:nth-child(1) {
+      top: 0;
+      left: 0%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #03e9f4);
+      animation: btn-anim1 1s linear infinite;
+    }
+
+    span:nth-child(2) {
+      top: 0%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #03e9f4);
+      animation: btn-anim2 1s linear infinite;
+      animation-delay: 0.5s;
+    }
+
+    span:nth-child(3) {
+      bottom: 0;
+      right: 0%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, #03e9f4);
+      animation: btn-anim3 1s linear infinite;
+      animation-delay: 1s;
+    }
+
+    span:nth-child(4) {
+      bottom: 0%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, #03e9f4);
+      animation: btn-anim4 1s linear infinite;
+      animation-delay: 1.5s;
+    }
+    
+  }
+  a:hover {
+    color: $textColor;
+    border-radius: 5px;
+    background-color: #03e9f4;
+    color: $textColor;
+    span {
+      background-color: $textColor;
+      animation:none;
+    }
+    span:nth-child(1) {
+      background-color: $textColor;
+      left: 0;
+      animation:none;
+    }
+    span:nth-child(2) {
+      background-color: $textColor;
+      top: 0;
+      animation:none;
+    }
+    span:nth-child(3) {
+      background-color: $textColor;
+      right: 0;
+      animation:none;
+    }
+    span:nth-child(4) {
+      background-color: $textColor;
+      bottom: 0;
+      animation:none;
+    }
+  }
+
+
+  span {
+    position: absolute;
+    font-size: 13px;
+    right: 15px;
+    bottom: 15px;
+    color: $textColor;
+    a {
+      text-decoration: none;
+      color: $clrPrimary;
+
+    }
+  }
+}

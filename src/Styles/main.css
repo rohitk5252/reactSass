@@ -1,0 +1,254 @@
+*, *::after, *::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  height: 100%;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(#41718a, #395370);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header {
+  padding-top: 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.col-1 {
+  width: 100%;
+}
+
+.col-2 {
+  width: 50%;
+}
+
+.col-3 {
+  width: 33.3333333333%;
+}
+
+.col-4 {
+  width: 25%;
+}
+
+.col-5 {
+  width: 20%;
+}
+
+.col-6 {
+  width: 16.6666666667%;
+}
+
+.col-7 {
+  width: 14.2857142857%;
+}
+
+.col-8 {
+  width: 12.5%;
+}
+
+.col-9 {
+  width: 11.1111111111%;
+}
+
+.col-10 {
+  width: 10%;
+}
+
+.col-11 {
+  width: 9.0909090909%;
+}
+
+.col-12 {
+  width: 8.3333333333%;
+}
+
+.login-box, .signup-box {
+  position: relative;
+  width: 400px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+.login-box h2, .signup-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+.login-box .user-box, .signup-box .user-box {
+  position: relative;
+}
+.login-box .user-box input, .signup-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label, .signup-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.login-box .user-box input:focus + label, .signup-box .user-box input:focus + label {
+  top: -20px;
+  left: 0;
+  color: #57b6d6;
+  font-size: 12px;
+}
+.login-box .user-box input:valid + label, .signup-box .user-box input:valid + label {
+  top: -20px;
+  left: 0;
+  color: #57b6d6;
+  font-size: 12px;
+}
+.login-box a.login, .login-box a.signup, .signup-box a.login, .signup-box a.signup {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #57b6d6;
+  font-size: 16px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+}
+.login-box a.login span, .login-box a.signup span, .signup-box a.login span, .signup-box a.signup span {
+  position: absolute;
+  display: block;
+}
+.login-box a.login span:nth-child(1), .login-box a.signup span:nth-child(1), .signup-box a.login span:nth-child(1), .signup-box a.signup span:nth-child(1) {
+  top: 0;
+  left: 0%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;
+}
+.login-box a.login span:nth-child(2), .login-box a.signup span:nth-child(2), .signup-box a.login span:nth-child(2), .signup-box a.signup span:nth-child(2) {
+  top: 0%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.5s;
+}
+.login-box a.login span:nth-child(3), .login-box a.signup span:nth-child(3), .signup-box a.login span:nth-child(3), .signup-box a.signup span:nth-child(3) {
+  bottom: 0;
+  right: 0%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 1s;
+}
+.login-box a.login span:nth-child(4), .login-box a.signup span:nth-child(4), .signup-box a.login span:nth-child(4), .signup-box a.signup span:nth-child(4) {
+  bottom: 0%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: 1.5s;
+}
+.login-box a:hover, .signup-box a:hover {
+  color: #fff;
+  border-radius: 5px;
+  background-color: #03e9f4;
+  color: #fff;
+}
+.login-box a:hover span, .signup-box a:hover span {
+  background-color: #fff;
+  animation: none;
+}
+.login-box a:hover span:nth-child(1), .signup-box a:hover span:nth-child(1) {
+  background-color: #fff;
+  left: 0;
+  animation: none;
+}
+.login-box a:hover span:nth-child(2), .signup-box a:hover span:nth-child(2) {
+  background-color: #fff;
+  top: 0;
+  animation: none;
+}
+.login-box a:hover span:nth-child(3), .signup-box a:hover span:nth-child(3) {
+  background-color: #fff;
+  right: 0;
+  animation: none;
+}
+.login-box a:hover span:nth-child(4), .signup-box a:hover span:nth-child(4) {
+  background-color: #fff;
+  bottom: 0;
+  animation: none;
+}
+.login-box span, .signup-box span {
+  position: absolute;
+  font-size: 13px;
+  right: 15px;
+  bottom: 15px;
+  color: #fff;
+}
+.login-box span a, .signup-box span a {
+  text-decoration: none;
+  color: #57b6d6;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    width: 0px;
+  }
+  50%, 100% {
+    width: 100%;
+  }
+}
+@keyframes btn-anim2 {
+  0% {
+    height: 0px;
+  }
+  50%, 100% {
+    height: 100%;
+  }
+}
+@keyframes btn-anim3 {
+  0% {
+    width: 0px;
+  }
+  50%, 100% {
+    width: 100%;
+  }
+}
+@keyframes btn-anim4 {
+  0% {
+    height: 0px;
+  }
+  50%, 100% {
+    min-height: 100%;
+  }
+}/*# sourceMappingURL=main.css.map */

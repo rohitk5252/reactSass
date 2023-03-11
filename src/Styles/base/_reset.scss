@@ -1,0 +1,26 @@
+@import "../abstract/mixins";
+@import "../abstract/variables";
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  &::after,
+  &::before {
+    @extend *;
+  }
+}
+html {
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+
+  height: 100%;
+  font-size: $fontSize;
+  color: $textColor;
+  background: linear-gradient(#41718a, #395370);
+  @include flexBox(center, center);
+}
