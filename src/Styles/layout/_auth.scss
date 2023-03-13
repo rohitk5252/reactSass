@@ -14,6 +14,7 @@
   .user-box {
     position: relative;
     input {
+      
       width: 100%;
       padding: 10px 0;
       font-size: 16px;
@@ -24,6 +25,7 @@
       outline: none;
       background: transparent;
     }
+    // input[type="""]
     label {
       position: absolute;
       top: 0;
@@ -45,6 +47,13 @@
       left: 0;
       color: $clrPrimary;
       font-size: 12px;
+    }
+    i {
+      position: absolute;
+      right: 0;
+      bottom: 60%;
+      cursor: pointer;
+      transition: all 0.5s; 
     }
   }
 
@@ -145,7 +154,9 @@
     a {
       text-decoration: none;
       color: $clrPrimary;
-
+    }
+    a:hover {
+      background-color: transparent;
     }
   }
 }

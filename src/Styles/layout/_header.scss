@@ -1,10 +1,53 @@
 header {
-    @include padding(top,10);
-    @include padding(right,10);
-    @include flexBox(center, center);
-    
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    svg {
+        position: absolute;
+        top:0;
+        z-index: -1;
+    }
     .container {
-        @include flexBox(center, space-between);
+        @include flexBox(center, space-around);
+        z-index: 9999;
+        padding: 20px 0;
+
+        .logo_part {
+            p {
+                color: #fff;
+            }
+        }
+
+        ul.navigation {
+            @include flexBoxG(center, center, 20px);
+            list-style: none;
+
+            a {
+                text-decoration: none;
+                color: $textColor;
+            }
+        }
+
+        .log_part {
+            @include flexBoxG(center, space-around, 20px);
+
+
+            button {
+                padding: 8px 16px;
+                color: #fff;
+                background-color: #202020;
+                box-shadow: 0 0 10px #323030;
+                border-radius: 4px;
+                transition: 0.5s;
+            }
+            button:hover {
+                transition: 0.5s;
+                transform: scale(1.1);
+                box-shadow: 0 0 12px #464040;
+            }
+        }
     }
 }
 

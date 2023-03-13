@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
+  const [type, setType] = useState("password")
   const handleLogin = (e) => {
     e.preventDefault();
-    
+  }
+
+  const handleEye = () => {
+    const typeNew = type==="password" ? "text" : "password"
+    setType(typeNew)
   }
 
 
@@ -19,8 +23,10 @@ const Login = () => {
           <label>Email</label>
         </div>
         <div className="user-box">
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
+          <input type={type} value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
           <label>Password</label>
+          {type==="password" && <i onClick={handleEye} class="fa-solid fa-eye"></i>}
+          {type==="text" && <i onClick={handleEye}  class="fa-solid fa-eye-slash"></i>}
         </div>
         <a onClick={handleLogin} className="login" href="#">
           <span></span>

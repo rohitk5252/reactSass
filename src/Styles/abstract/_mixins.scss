@@ -8,6 +8,12 @@
     align-items: $align;
     justify-content: $justify; 
 }
+@mixin flexBoxG($align, $justify, $gap) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify; 
+    gap: $gap;
+}
 
 @mixin flexBoxD($align, $justify, $direction) {
     display: flex;
