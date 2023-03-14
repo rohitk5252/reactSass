@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Form, Route, Routes } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -9,6 +9,14 @@ import Signup from "./Components/Signup";
 
 function App() {
   const [user, setUser] = useState("")
+
+  useEffect(() => {
+    const localUser = localStorage.getItem("user")
+    if(localUser) {
+      setUser(localUser)
+    }
+  }, [])
+  
   return (
     <div className="App">
       <BrowserRouter>

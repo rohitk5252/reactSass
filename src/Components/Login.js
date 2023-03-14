@@ -1,11 +1,37 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-const Login = () => {
+import { Link,useNavigate } from "react-router-dom";
+
+const Login = ({user, setUser}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [type, setType] = useState("password")
-  const handleLogin = (e) => {
+  const navigate = useNavigate()
+
+  const handleLogin = async (e) => {
     e.preventDefault();
+    const response = await fetch("http://localhost:4000/api/user/login", {
+      method: 'POST',
+      headers : {'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        email, password
+      })
+    });
+
+    const json = await response.json();
+
+    if(!response.ok) {
+      alert(json.error)
+      return 
+    }
+
+    localStorage.setItem("user", json.user.username);
+    localStorage.setItem(json.user.username, JSON.stringify({
+      email,
+      company: json.user.company
+    }))
+    console.log(json)
+    setUser(json.user.username)
+    navigate("/")
   }
 
   const handleEye = () => {
@@ -19,20 +45,16 @@ const Login = () => {
       <h2>Login</h2>
       <form>
         <div className="user-box">
-          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required={true} />
           <label>Email</label>
         </div>
         <div className="user-box">
           <input type={type} value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
           <label>Password</label>
-          {type==="password" && <i onClick={handleEye} class="fa-solid fa-eye"></i>}
-          {type==="text" && <i onClick={handleEye}  class="fa-solid fa-eye-slash"></i>}
+          {type==="text" && <i onClick={handleEye} class="fa-solid fa-eye"></i>}
+          {type==="password" && <i onClick={handleEye}  class="fa-solid fa-eye-slash"></i>}
         </div>
         <a onClick={handleLogin} className="login" href="#">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
           Log in
         </a>
       </form>

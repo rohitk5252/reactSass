@@ -22,34 +22,30 @@ const Signup = ({user, setUser}) => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const localUser = localStorage.getItem("user")
 
-    if(localUser) {
-      alert("Already Exists")
-    }
-
-    const response = await fetch('https://webhook.site/0f40456e-0ab5-42f3-ae02-6f6a051ed7aa', {
+    const response = await fetch('http://localhost:4000/api/user/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         username,
+        email,
         password,
-        email
+        company
 }) })
-    console.log(Object.keys(response), response.ok, response.url)
+// console.log("response", response)
 
-    // const json = await response.json();
-    // console.log(json)
+
+    const json = await response.json();
+    console.log("json", json.error)
 
     if(!response.ok) {
-      alert("Failed to Signup")
+      alert(json.error)
       return ;
     }
 
     localStorage.setItem("user", username);
     localStorage.setItem(username, JSON.stringify({
-      username, email, password,
-      link: response.url
+      email, company
     }))
 
     setUser(username)

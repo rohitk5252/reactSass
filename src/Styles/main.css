@@ -37,7 +37,12 @@ header .container {
   padding: 20px 0;
 }
 header .container .logo_part p {
+  cursor: pointer;
   color: #fff;
+  border-radius: 50%;
+  border: 2px solid rgb(0, 0, 0);
+  padding: 20px;
+  box-shadow: 0 0 8px #393232;
 }
 header .container ul.navigation {
   display: flex;
