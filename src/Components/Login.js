@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 
-const Login = ({user, setUser}) => {
+const Login = ({user, setUser, setToken}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [type, setType] = useState("password")
@@ -26,11 +26,13 @@ const Login = ({user, setUser}) => {
 
     localStorage.setItem("user", json.user.username);
     localStorage.setItem(json.user.username, JSON.stringify({
-      email,
-      company: json.user.company
+      email:json.user.email,
+      company: json.user.company,
+      token: json.token
     }))
-    console.log(json)
+    // console.log(json)
     setUser(json.user.username)
+    setToken(json.token);
     navigate("/")
   }
 

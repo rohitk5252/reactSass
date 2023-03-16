@@ -6,7 +6,7 @@ header {
 
     svg {
         position: absolute;
-        top:0;
+        top:-50px;
         z-index: -1;
     }
     .container {
@@ -43,7 +43,7 @@ header {
                 padding: 8px 16px;
                 color: #fff;
                 background-color: #202020;
-                box-shadow: 0 0 10px #323030;
+                box-shadow: 0 0 10px #1c1a1a;
                 border-radius: 4px;
                 transition: 0.5s;
             }
