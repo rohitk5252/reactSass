@@ -1,10 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
+import { useDispatch } from "react-redux";
+import { logout } from '../features/user'
 
-const Account = ({ user, setUser, token }) => {
+
+const Account = () => {
   const navigate = useNavigate();
-  const username = localStorage.getItem("user");
-  const userData = JSON.parse(localStorage.getItem(username));
+  const dispatch = useDispatch()
+  
+  const userData = JSON.parse(Cookies.get("user"))
+  const token = Cookies.get("user")
 
   const handleDelete = async () => {
     const response = await fetch("http://localhost:4000/api/user/delete", {
@@ -24,9 +30,10 @@ const Account = ({ user, setUser, token }) => {
       alert(json.error);
       return;
     }
-    setUser("");
-    localStorage.removeItem("user");
-    localStorage.removeItem(username);
+
+    dispatch(logout())
+    Cookies.remove('token')
+    Cookies.remove('user')
     navigate("/login");
   };
   return (
@@ -34,7 +41,7 @@ const Account = ({ user, setUser, token }) => {
       <div className="account">
         <div className="user_card">
           <div className="username">
-            <h1>{username}</h1>
+            <h1>{userData.username}</h1>
             <i title="edit" class="fa-solid fa-pen-to-square"></i>
           </div>
           <div className="email">

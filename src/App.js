@@ -1,68 +1,51 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Form, Route, Routes, Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import Account from "./Components/Account";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import { useSelector, useDispatch } from "react-redux";
+
+import { login } from "./features/user";
 
 function App() {
-  const [user, setUser] = useState("");
-  const [token, setToken] = useState("");
-
+  const {username} = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    const localUser = localStorage.getItem("user");
-    if (localUser) {
-      setToken(JSON.parse(localStorage.getItem(localUser)).token);
-      setUser(localUser);
+    const token = Cookies.get("token")
+    if (token) {
+      const localUser = JSON.parse(Cookies.get("user"));
+      dispatch(
+        login({ username: localUser.username, token: Cookies.get("token") })
+      );
     }
   }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header user={user} setUser={setUser} />
+        <Header />
+        <p>{"user -"+ username}</p>
         <Routes>
           <Route
             path="/"
-            element={
-              user ? (
-                <Home user={user} setUser={setUser} token={token} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
+            element={username ? <Home /> : <Navigate to="/login" />}
           />
           <Route
             path="/login"
-            element={
-              user ? (
-                <Navigate to="/" />
-              ) : (
-                <Login user={user} setUser={setUser} setToken={setToken} />
-              )
-            }
+            element={username ? <Navigate to="/" /> : <Login />}
           />
           <Route
             path="/signup"
-            element={
-              user ? (
-                <Navigate to="/" />
-              ) : (
-                <Signup user={user} setUser={setUser} setToken={setToken} />
-              )
-            }
+            element={username ? <Navigate to="/" /> : <Signup />}
           />
           <Route
             path="/account"
-            element={
-              user ? (
-                <Account user={user} setUser={setUser} token={token} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
+            element={username ? <Account /> : <Navigate to="/login" />}
           />
         </Routes>
         <Footer />

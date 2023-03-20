@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import Cookies from 'js-cookie';
 
-const Home = ({user, setUser, token}) => {
-  const localUser = localStorage.getItem("user")
+
+const Home = () => {
+  const localUser = JSON.parse(Cookies.get('user'))
+  const token = Cookies.get('token');
+
   const [allUsers, setAllUsers] = useState([])
 
-  if(localUser) {
-    setUser(localUser)
-  }
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -21,13 +22,13 @@ const Home = ({user, setUser, token}) => {
         alert("could not fetch all users")
         return
       }
-      console.log("All users:", json)
+      // console.log("All users:", json)
       setAllUsers(json)
     }
 
 
       
-  if(localUser) {
+  if(localUser.username) {
     fetchAllUsers()
   }
   }, [])
@@ -35,8 +36,8 @@ const Home = ({user, setUser, token}) => {
   
   return (
     <div className='homepage'>
-      {user && <h1>Welcome {user}</h1> }
-      {!user && <p>Login First</p> }
+      {localUser.username && <h1>Welcome {localUser.username}</h1> }
+      {!localUser.username && <p>Login First</p> }
       {allUsers.map(({_id, username, email, company})=>{
         return (
           <div key={_id} className="account home">

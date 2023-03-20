@@ -1,7 +1,13 @@
 import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Cookies from 'js-cookie';
+import { login } from "../features/user"
 
-const Signup = ({ setUser, setToken }) => {
+
+const Signup = () => {
+  const dispatch = useDispatch()
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +25,7 @@ const Signup = ({ setUser, setToken }) => {
         username,
         email,
         password,
-        company,
+        company
       }),
     });
     
@@ -30,20 +36,27 @@ const Signup = ({ setUser, setToken }) => {
       alert(json.error);
       return;
     }
-    console.log("json", json);
-    
-    localStorage.setItem("user", username);
-    localStorage.setItem(
-      username,
-      JSON.stringify({
-        email,
-        company,
-        token: json.token
-      })
-    );
 
-    setUser(username);
-    setToken(json.token);
+    // dispatch action to update the Value in the redux store (userSlice) 
+    dispatch(login({username, token: json.token}))
+
+
+    console.log("json", json);
+    Cookies.set('token', json.token , { expires: 7, secure: true, sameSite: 'strict' });
+    Cookies.set('user', JSON.stringify({username, email, company}) , { expires: 7, secure: true, sameSite: 'strict' });
+
+    // localStorage.setItem("user", username);
+    // localStorage.setItem(
+    //   username,
+    //   JSON.stringify({
+    //     email,
+    //     company
+    //   })
+    // );
+
+    // setUser(username);
+    // setToken(json.token);
+    // -----
     navigate("/");
   };
 
@@ -104,7 +117,7 @@ const Signup = ({ setUser, setToken }) => {
           <span></span>
           <span></span>
           <span></span>
-          Sign Up
+          Sign Up 
         </a>
       </form>
       <span className="newuser">

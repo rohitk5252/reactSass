@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
+import { useDispatch } from "react-redux";
+import { login } from "../features/user";
 
-const Login = ({user, setUser, setToken}) => {
+const Login = () => {
+  const dispatch = useDispatch()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [type, setType] = useState("password")
@@ -24,15 +29,18 @@ const Login = ({user, setUser, setToken}) => {
       return 
     }
 
-    localStorage.setItem("user", json.user.username);
-    localStorage.setItem(json.user.username, JSON.stringify({
-      email:json.user.email,
-      company: json.user.company,
-      token: json.token
-    }))
+    Cookies.set('token', json.token , { expires: 7, secure: true, sameSite: 'strict' });
+    Cookies.set('user', JSON.stringify({username: json.user.username, email:json.user.email, company: json.user.company})  , { expires: 7, secure: true, sameSite: 'strict' });
+
+    // localStorage.setItem("user", json.user.username);
+    // localStorage.setItem(json.user.username, JSON.stringify({
+    //   email:json.user.email,
+    //   company: json.user.company,
+    //   token: json.token
+    // }))
+    // ---
     // console.log(json)
-    setUser(json.user.username)
-    setToken(json.token);
+    dispatch(login({username: json.user.username, token: json.token }))
     navigate("/")
   }
 
