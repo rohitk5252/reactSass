@@ -1,65 +1,94 @@
-import React, { useEffect, useState } from 'react'
-import Cookies from 'js-cookie';
-
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { STATUSES } from "../store/features/newsSlice";
+import { fetchNews } from "../store/features/newsSlice";
+import Cookies from "js-cookie";
 
 const Home = () => {
-  const localUser = JSON.parse(Cookies.get('user'))
-  const token = Cookies.get('token');
+  const localUser = JSON.parse(Cookies.get("user"));
+  const token = Cookies.get("token");
+  const [searchQuery, setSearchQuery] = useState("")
+  const { data: articles, status } = useSelector((state) => state.news);
+  const dispatch = useDispatch();
 
-  const [allUsers, setAllUsers] = useState([])
+  const handleSearch = () => {
+      if(!searchQuery) return 
+      console.log("seached")
+      const searchApi = `http://localhost:4000/api/articles/${searchQuery}`
+      console.log("seached", searchApi)
+
+      dispatch(fetchNews([searchApi, token]));
+  }
+
+  const [newsApi, setNewsApi] = useState(
+    "http://localhost:4000/api/articles/all"
+  );
 
 
   useEffect(() => {
-    const fetchAllUsers = async () => {
-      const response = await fetch('http://localhost:4000/api/user/all', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-      const json = await response.json()
-  
-      if(!response.ok) {
-        alert("could not fetch all users")
-        return
-      }
-      // console.log("All users:", json)
-      setAllUsers(json)
+    if (localUser.username) {
+      dispatch(fetchNews([newsApi, token]));
     }
+  }, []);
 
-
-      
-  if(localUser.username) {
-    fetchAllUsers()
+  if (status === STATUSES.LOADING) {
+    return <h2>Loading....</h2>;
   }
-  }, [])
-  
-  
-  return (
-    <div className='homepage'>
-      {localUser.username && <h1>Welcome {localUser.username}</h1> }
-      {!localUser.username && <p>Login First</p> }
-      {allUsers.map(({_id, username, email, company})=>{
-        return (
-          <div key={_id} className="account home">
-        <div className="user_card">
-          <div className="username">
-            <h1>{username}</h1>
-            <i title="edit" class="fa-solid fa-pen-to-square"></i>
-          </div>
-          <div className="email">
-            <span>{email}</span>
-            <i class="fa-solid fa-pen-to-square"></i>
-          </div>
-          <div className="email">
-            <span>{company}</span>
-            <i class="fa-solid fa-pen-to-square"></i>
-          </div>
-        </div>
-      </div>
-        )
-      })}
-    </div>
-  )
-}
 
-export default Home
+  if (status === STATUSES.ERROR) {
+    return <h2>ERROR</h2>;
+  }
+ 
+  return (
+    <div className="homepage">
+      <div className="homeHead">
+      {localUser.username && <h1>Welcome {localUser.username}</h1>}
+      {!localUser.username && <p>Login First</p>}
+
+      <div className="searchbar">
+        <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} type="text" placeholder="Search"/>
+        <i onClick={handleSearch} class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      </div>
+      <div className="articleWrapper">
+
+      {articles.map(
+        ({
+          _id,
+          source,
+          author,
+          title,
+          description,
+          url,
+          urlToImage,
+          content,
+          publishedAt,
+        }) => {
+          return (
+              <div  key={_id} className="articleCard">
+                <div className="articleHead">
+                  <div>
+                    <h1>{title}</h1> <span>By: {author}</span>
+                  </div>
+                  <div>
+                    Originally published in <b>{source.name}</b>
+                  </div>
+                  <div>{publishedAt}</div>
+                </div>
+                <div className="articleBody">
+                  <div className="image">{urlToImage}</div>
+                  <img src="" alt="" />
+                  <div className="description">{description}</div>
+                  {/* <div className="email">{content}</div> */}
+                </div>
+                <a href={url} target="_blank">Read More</a>
+              </div>
+          );
+        }
+      )}
+      </div>
+    </div>
+  );
+};
+
+export default Home;

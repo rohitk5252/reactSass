@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useDispatch } from "react-redux";
-import { login } from "../features/user";
+import { login } from "../store/features/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -61,8 +61,8 @@ const Login = () => {
         <div className="user-box">
           <input type={type} value={password} onChange={(e) => setPassword(e.target.value)} required={true} />
           <label>Password</label>
-          {type==="text" && <i onClick={handleEye} class="fa-solid fa-eye"></i>}
-          {type==="password" && <i onClick={handleEye}  class="fa-solid fa-eye-slash"></i>}
+          {type==="password" && <i onClick={handleEye} class="fa-solid fa-eye"></i>}
+          {type==="text" && <i onClick={handleEye}  class="fa-solid fa-eye-slash"></i>}
         </div>
         <a onClick={handleLogin} className="login" href="#">
           Log in

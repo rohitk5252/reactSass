@@ -8,11 +8,11 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import { useSelector, useDispatch } from "react-redux";
+import { login } from "./store/features/userSlice";
 
-import { login } from "./features/user";
 
 function App() {
-  const {username} = useSelector((state) => state.user.value);
+  const {username} = useSelector((state) => state.user);
   const dispatch = useDispatch();
   
   useEffect(() => {

@@ -13,9 +13,6 @@ body {
   font-size: 1rem;
   color: #fff;
   background: linear-gradient(#41718a, #395370);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 header {
@@ -73,6 +70,49 @@ header .container .log_part button:hover {
   transition: 0.5s;
   transform: scale(1.1);
   box-shadow: 0 0 12px #464040;
+}
+
+.homepage {
+  margin-top: 100px;
+  padding: 0 15px;
+}
+.homepage .homeHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.homepage .homeHead .searchbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.homepage .homeHead .searchbar i {
+  font-size: 25px;
+  cursor: pointer;
+}
+.homepage .homeHead .searchbar i:hover {
+  color: black;
+}
+.homepage .homeHead .searchbar input {
+  padding: 10px 20px;
+  border-radius: 20px;
+  outline: none;
+  border: 5px solid #121212;
+  box-shadow: 0 0 5px #ddd;
+}
+
+.articleWrapper {
+  margin-top: 20px;
+}
+.articleWrapper .articleCard {
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 20px;
+  box-shadow: 0 0 5px black;
+}
+.articleWrapper .articleCard:hover {
+  box-shadow: 0 0 10px black;
 }
 
 .col-1 {

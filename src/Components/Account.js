@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useDispatch } from "react-redux";
-import { logout } from '../features/user'
+import { logout } from "../store/features/userSlice";
 
 
 const Account = () => {
@@ -10,7 +10,7 @@ const Account = () => {
   const dispatch = useDispatch()
   
   const userData = JSON.parse(Cookies.get("user"))
-  const token = Cookies.get("user")
+  const token = Cookies.get("token")
 
   const handleDelete = async () => {
     const response = await fetch("http://localhost:4000/api/user/delete", {

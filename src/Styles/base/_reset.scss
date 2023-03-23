@@ -22,5 +22,5 @@ body {
   font-size: $fontSize;
   color: $textColor;
   background: linear-gradient(#41718a, #395370);
-  @include flexBox(center, center);
+  // @include flexBox(center, center);
 }

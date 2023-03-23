@@ -1,0 +1,37 @@
+.homepage {
+    margin-top: 100px;
+    padding: 0 15px;
+    .homeHead {
+        @include flexBox(center, space-between);
+        .searchbar {
+        @include flexBoxG(center, space-between, 15px);
+         i {
+            font-size: 25px;
+            cursor: pointer;
+         }
+         i:hover {
+            color: black;
+         }
+            input {
+                padding: 10px 20px;
+                border-radius: 20px;
+                outline: none;
+                border: 5px solid #121212;
+                box-shadow:  0 0 5px #ddd;
+            }
+        }
+    }
+}
+
+.articleWrapper {
+    margin-top: 20px;
+    .articleCard{
+        border-radius: 20px;
+        margin-top: 10px;
+        padding: 20px;
+        box-shadow: 0 0 5px black;
+    }
+    .articleCard:hover{
+        box-shadow: 0 0 10px black;
+    }
+}

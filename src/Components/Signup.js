@@ -2,7 +2,7 @@ import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from 'js-cookie';
-import { login } from "../features/user"
+import { login } from "../store/features/userSlice";
 
 
 const Signup = () => {
