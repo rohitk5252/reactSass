@@ -35,8 +35,6 @@ const newsSlice = createSlice({
     }
 })
 
-
-
 export default newsSlice.reducer
 
 
@@ -49,7 +47,7 @@ export default newsSlice.reducer
 // -----------------------
 // ------------------------------------------  identifier below
 export const fetchNews = createAsyncThunk('news/fetch', async(arr)=> { 
-    console.log("newsApi",  arr[0])
+    // console.log("newsApi",  arr[0])
     const res = await fetch(arr[0], {
         headers: {
           'Authorization': `Bearer ${arr[1]}`

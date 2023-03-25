@@ -3,6 +3,9 @@
     padding: 0 15px;
     .homeHead {
         @include flexBox(center, space-between);
+        .sourceFiler {
+        @include flexBoxG(center, space-between, 15px);
+        }
         .searchbar {
         @include flexBoxG(center, space-between, 15px);
          i {
